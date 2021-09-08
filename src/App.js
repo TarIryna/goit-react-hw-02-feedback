@@ -33,29 +33,30 @@ class App extends Component {
   };
 
   countPositivePercentage = () => {
-    let percentage = 0;
     if (this.state.good > 0) {
-      return percentage = this.state.good / this.countTotal() * 100;
+      return Math.round(this.state.good / this.countTotal() * 100);
     }
   }
 
   render() {
-    const { good, neutral, bad} = this.state;
-  return (
-    <div className="App">
-      <Controls
-        onGood={this.addGood}
-        onNeutral={this.addNeutral}
-        onBad={this.addBad}
-      />
-      <Statistics
-        good={good}
-        neutral={neutral}
-        bad={bad}
-        total={this.countTotal()}
-        percentage={ this.countPositivePercentage()}
-      />
-    </div>
+    const { good, neutral, bad } = this.state;
+    return (
+      <div className="App">
+        <Controls
+          onGood={this.addGood}
+          onNeutral={this.addNeutral}
+          onBad={this.addBad}
+        />
+        { this.countTotal()>0 &&  (<Statistics
+            good={good}
+            neutral={neutral}
+            bad={bad}
+            total={this.countTotal()}
+            percentage={this.countPositivePercentage()}
+        />)
+        }
+      
+         </div>
   );
 }
 }

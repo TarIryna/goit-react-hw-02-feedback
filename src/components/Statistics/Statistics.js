@@ -12,4 +12,8 @@ const Statistics = ({good, neutral, bad, total, percentage}) => (
     </div>
 );
 
+Statistics.defaultProps = {
+    percentage: 0,
+}
+
 export default Statistics;
