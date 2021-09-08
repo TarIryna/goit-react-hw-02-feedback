@@ -2,30 +2,31 @@ import './App.css';
 import React, { Component } from 'react';
 import Controls from './components/Controls';
 import Statistics from './components/Statistics';
+import Notification from './components/Notification';
 
 class App extends Component {
 
-   state = {
+  state = {
     good: 0,
     neutral: 0,
     bad: 0
-   };
-  
-    addGood = () => {
-        this.setState(prevState => ({
-          good: prevState.good + 1,
-        }));
-    };
-    addNeutral = () => {
-        this.setState(prevState => ({
-            neutral: prevState.neutral + 1,
-        }));
-    };
-    addBad = () => {
-        this.setState(prevState => ({
-          bad: prevState.bad + 1,
-        }));
-    };
+  };
+
+  addGood = () => {
+    this.setState(prevState => ({
+      good: prevState.good + 1,
+    }));
+  };
+  addNeutral = () => {
+    this.setState(prevState => ({
+      neutral: prevState.neutral + 1,
+    }));
+  };
+  addBad = () => {
+    this.setState(prevState => ({
+      bad: prevState.bad + 1,
+    }));
+  };
 
   countTotal = () => {
     const total = this.state.good + this.state.neutral + this.state.bad;
@@ -47,18 +48,20 @@ class App extends Component {
           onNeutral={this.addNeutral}
           onBad={this.addBad}
         />
-        { this.countTotal()>0 &&  (<Statistics
+
+        
+        {this.countTotal() > 0 ?
+          (<Statistics
             good={good}
             neutral={neutral}
             bad={bad}
             total={this.countTotal()}
             percentage={this.countPositivePercentage()}
-        />)
-        }
-      
-         </div>
-  );
-}
+          />) :
+          <Notification message="No feedback given" />}
+      </div>
+    );
+  }
 }
 
 export default App;
