@@ -7,5 +7,7 @@ const Notification = ({ message }) => (
        </div>
 );
 
-
+Notification .propTypes = {
+  message: PropTypes.string,
+};
 export default Notification;

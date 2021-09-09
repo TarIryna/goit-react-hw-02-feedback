@@ -11,4 +11,8 @@ const Controls = ({statNames, onBtnFeedback}) => (
             </div>
     </div>
 );
+Controls.propTypes = {
+    statNames: PropTypes.arrayOf(PropTypes.string),
+    onBtnFeedback: PropTypes.func,
+};
 export default Controls;
