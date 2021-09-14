@@ -5,14 +5,13 @@ import Statistics from './components/Statistics';
 import Notification from './components/Notification';
 
 class App extends Component {
-
   state = {
     good: 0,
     neutral: 0,
-    bad: 0
+    bad: 0,
   };
-  
-  addFeedback = (key) => {
+
+  addFeedback = key => {
     this.setState(prevState => ({
       [key]: prevState[key] + 1,
     }));
@@ -25,27 +24,26 @@ class App extends Component {
 
   countPositiveFeedbackPercentage = () => {
     if (this.state.good > 0) {
-      return Math.round(this.state.good / this.countTotalFeedback() * 100);
+      return Math.round((this.state.good / this.countTotalFeedback()) * 100);
     }
-  }
+  };
 
   render() {
     const { good, neutral, bad } = this.state;
     return (
       <div className="App">
-        <Controls
-          statNames={Object.keys(this.state)}
-          onBtnFeedback={this.addFeedback}
-        />
-        {this.countTotalFeedback() > 0 ?
-          (<Statistics
+        <Controls statNames={Object.keys(this.state)} onBtnFeedback={this.addFeedback} />
+        {this.countTotalFeedback() > 0 ? (
+          <Statistics
             good={good}
             neutral={neutral}
             bad={bad}
             total={this.countTotalFeedback()}
             percentage={this.countPositiveFeedbackPercentage()}
-          />) :
-          <Notification message="No feedback given" />}
+          />
+        ) : (
+          <Notification message="No feedback given" />
+        )}
       </div>
     );
   }
